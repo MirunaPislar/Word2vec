@@ -1,12 +1,53 @@
-# Word2vec
-Sentiment analysis using deep learning (word2vec model).
+# word2vec
 
-Two word2vec algorithms implemented: skip-gram (using negative sampling, for efficiency) and CBOW (continuous bag of words). 
+Implementation of two word2vec algorithms from scratch: skip-gram (with negative sampling) and CBOW (continuous bag of words).
 
-Useful link to an explanation for the skip-gram model (and in general, for the word2vec model): http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/
+No machine learning libraries were used. All gradients and cost functions are implemented from scratch. I provide various "sanity-check" tests for all main functionalities implemented.
 
-After running word2vec.py, we have vector representations for each word in our dataset (these vectors encapsulate the whole meaning of the words in the corpus and their values will cluster based on similarities between words - an example is shown in word_vectors_visualization.png). These word-vectors are then used to perform the (very simple) sentiment analysis task. 
+Important: the entire project and implementation are inspired by the first assignment in [Stanford's course "Deep Learning for NLP" (2017)](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/). The tasks can be found at [this address](http://cs224d.stanford.edu/assignment1/index.html).
 
-To train the word vectors we used the Stanford Sentiment Treebank (SST) dataset. Run sh get datasets.sh to get the dataset. Stochastic gradient descent is used for updating. The entire training process will take quite a bit of time (anywhere between 2 and 3 hours, it's performing 40,000 iterations).
+The word vectors are trained on the Stanford Sentiment Treebank (SST). Stochastic gradient descent is used for updating. The entire training process (roughly 40,000 iterations) will take ~3 hours on a standard machine (no GPUs). These word-vectors can be used to perform a (very simple) sentiment analysis task. Alternatively, pre-trained vectors can be used. More details about various parts of the implementation can be found in the assignment description (attached as a pdf, *assignment1_description*).
 
-Note: No Tensorflow or any other machine learning libraries used. All gradients and cost functions are implemented from scratch, based on Stanford's Deep Learning course. There are various "sanity-check" tests for all important implemented functionalities.
+### List of requirements
+* [python](https://www.python.org/downloads/) (tested with 2.7.12)
+* [numpy](https://github.com/numpy/numpy) (tested with 1.15.4)
+* [scikit-learn](https://github.com/scikit-learn/scikit-learn) (tested with 0.19.1)
+* [scipy](https://www.scipy.org) (tested with 1.0.0)
+* [matplotlib](https://github.com/matplotlib/matplotlib) (tested with 2.1.0)
+
+### How to run
+
+1. To download the datasets: 
+```bash
+chmod +x get_datasets.sh
+./get_datasets.sh
+```
+to 
+2. To train some word embeddings:
+```bash
+python word2vec.py
+```
+3. To perform sentiment analysis with your word vectors:
+```bash
+python sentiment_analysis.py --yourvectors
+```
+4. To perform sentiment analysis with pretrained word vectors (GloVe):
+```bash
+python sentiment_analysis.py --pretrained
+```
+
+### Vector space
+
+![Vector space visualisation](word_vectors_visualization.png)
+
+### Licence
+
+All my source code is licensed under the MIT license. Consider citing Stanford's Sentiment Treebank if you use the dataset. If you are using this code for purposes other than educational, please acknowledge Stanford's course as they were the initiators of the project, providing many core parts included in the current implementation.
+
+### Resources
+
+- [Videos for Stanford's Deep Learning for NLP course (Winter 2017)](https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6)
+- [Current page of the course (Winter 2019)](http://web.stanford.edu/class/cs224n/)
+- [Syllabus (Winter 2017) on which the current implementation for the first assignment relies on](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/syllabus.html)
+- [Chris McCormick's explanation of skip-gram](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+- [Stanford's Sentiment Treebank](https://aclanthology.info/papers/D13-1170/d13-1170)
